@@ -1,5 +1,5 @@
 # Confer
-Add a real-time chat system to your laravel 5 website/application in a few lines of code
+Add a real-time chat system to your laravel 5.2 website/application in a few lines of code
 
 Recently I have had a few projects that have required a chat feature, and I wanted to create a laravel package - so here it is!
 
@@ -26,7 +26,8 @@ Other requirements:
 # Installation
 
 Require the package via composer:
-`composer require djb/confer`
+`composer require pusher/pusher-php-server dev-master`
+`composer require djb/confer dev-master`
 
 Publish the assets:
 `php artisan vendor:publish`
@@ -45,9 +46,7 @@ class DatabaseSeeder extends Seeder {
  */
 public function run()
 {
-  Model::unguard();
-
-  $this->call('ConferSeeder');
+  $this->call(ConferSeeder::class);
 }
 ```
 
@@ -57,13 +56,12 @@ Migrate your database with the seeds in tow:
 Add the trait to your User model:
 
 ```php
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use DJB\Confer\Traits\CanConfer;
 
-class User extends Model {
-
-  use CanConfer;
-
-}
+class User extends Authenticatable
+{
+     use CanConfer;
 ```
 
 Link to the css file, and import the view partials in whichever pages you wish to have the chat on, or put it in your app/master file (if you are using one) to show on all pages:
@@ -73,9 +71,9 @@ Link to the css file, and import the view partials in whichever pages you wish t
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 @include('confer::confer')
 
-<script src="/js/jquery.min.js"></script>
-<script src="/js/pusher.min.js"></script>
-<script src="/js/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script src="https://js.pusher.com/3.2/pusher.min.js"></script>
+<script src="http://momentjs.com/downloads/moment.js"></script>
 @include('confer::js')
 ```
 

@@ -1,5 +1,8 @@
 <?php
 
+Route::group( [ 'middleware' => ['web'] ], function () 
+{
+
 Route::model('conferconversation', 'DJB\Confer\Conversation');
 Route::model('conferuser', 'App\User');
 
@@ -26,3 +29,6 @@ Route::patch('confer/conversation/{conferconversation}', ['as' => 'confer.conver
 Route::post('confer/session', ['as' => 'confer.session.store', 'uses' => 'DJB\Confer\Http\Controllers\SessionController@store']);
 Route::patch('confer/requests/session', ['as' => 'confer.session.update', 'uses' => 'DJB\Confer\Http\Controllers\SessionController@update']);
 Route::get('confer/session/clear', ['as' => 'confer.session.destroy', 'uses' => 'DJB\Confer\Http\Controllers\SessionController@destroy']);
+
+
+});
