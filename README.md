@@ -26,7 +26,9 @@ Other requirements:
 # Installation
 
 Require the package via composer:
+
 `composer require pusher/pusher-php-server dev-master`
+
 `composer require djb/confer dev-master`
 
 Publish the assets:
